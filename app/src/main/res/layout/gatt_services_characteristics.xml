@@ -14,15 +14,15 @@
      limitations under the License.
 -->
 
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <!-- Here you put the rest of your current view-->
 <LinearLayout
     android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_margin="10dp">
 <!--    <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
@@ -87,6 +87,8 @@
             android:text="Null" />
 
     </LinearLayout>
+
+
 <!--    <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -109,6 +111,17 @@
         android:layout_width="match_parent"
         android:layout_height="30dp" />-->
 
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp">
 
     <!--Balance-->
     <View
@@ -679,9 +692,11 @@
             android:text="Write To Toy" />
 
     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 
 </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

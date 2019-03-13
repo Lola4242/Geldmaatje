@@ -441,7 +441,7 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
 
     private void displayData(String data) {
         if (data != null) {
-            mDataField.setText(data.replace(" ", ""));
+            mDataField.setText(data.replaceAll("[^a-zA-Z0-9 ]", "" ));
         }
     }
 
