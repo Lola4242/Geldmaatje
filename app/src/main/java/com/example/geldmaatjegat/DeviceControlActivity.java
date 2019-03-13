@@ -129,6 +129,12 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
 
     public HashMap<String, Byte> pictureMap = new HashMap();
 
+    TextView textView = null;
+
+    String nameUpload = "";
+    TextView nameUploadTextview = null;
+
+
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -372,6 +378,8 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
         // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
         // response to some other intent, and the code below shouldn't run at all.
 
+        nameUploadTextview = findViewById(R.id.nameUpload);
+
         if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // The document selected by the user won't be returned in the intent.
             // Instead, a URI to that document will be contained in the return intent
@@ -401,6 +409,7 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
                 Log.i(TAG, "Uri: " + uri.toString());
                 try {
                     readTextFromUri(uri, 1);
+                    nameUploadTextview.setText("PICTURE: \n" + uri.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -419,6 +428,8 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
                 Log.i(TAG, "Uri: " + uri.toString());
                 try {
                     readTextFromUri(uri, 2);
+                    nameUploadTextview.setText("FIRMWARE: \n " + uri.toString());
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -566,7 +577,8 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
 
         mDataField.setText("NULL");
 
-        final TextView textView = (TextView) findViewById(R.id.textView2);
+        textView = (TextView) findViewById(R.id.textView2);
+
 
         final TextView balanceInput = findViewById(R.id.balance_input);
 
@@ -655,7 +667,7 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
                 resultWritten = uploadImage();
                 break;
             case R.id.uploadImageInit:
-                resultWritten = uploadImageInit();
+                uploadImageInit();
                 break;
             case R.id.uploadFirmware:
                 resultWritten = uploadFirmware();
@@ -685,6 +697,11 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
 
 
         mBluetoothLeService.writeValue(hash,characteristicGM);
+
+        nameUploadTextview = findViewById(R.id.nameUpload);
+        nameUploadTextview.setText("");
+
+
 
 
         //mBluetoothLeService.writeValue(new byte[]{(byte) 0x44, (byte) 0x0b,(byte) 0x03, (byte) 0xf0},characteristicGM);
@@ -752,6 +769,8 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
             pictureArray = longToByteArray(new Long((int) Math.ceil(combined.length/20.0)), FIRMWARE_TRANSFER_LENGTH, FIRMWARE_TRANSFER);
         }
 
+        resultWritten = pictureArray;
+        textView.setText(byteToHex(resultWritten));
 
         mBluetoothLeService.writeCharacterisitc(pictureArray,characteristicGM);
 

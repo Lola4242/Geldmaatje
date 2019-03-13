@@ -669,7 +669,7 @@
 
         <Button
             android:id="@+id/uploadFirmware"
-            android:layout_width="140dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Upload Firmware" />
         <Button
@@ -679,6 +679,12 @@
             android:text="Upload Sound" />
 
     </LinearLayout>
+
+            <TextView
+                android:id="@+id/nameUpload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
 
     <LinearLayout android:orientation="horizontal"
         android:layout_width="match_parent"
